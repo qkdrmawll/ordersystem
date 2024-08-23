@@ -32,7 +32,3 @@ jobs:
           key: ${{secrets.EC2_PEMKEY}}
           source: "./build/libs/*.jar"
           target: "/home/ubuntu"
-
-
-      - name:
-        uses:
