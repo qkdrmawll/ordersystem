@@ -40,11 +40,16 @@ public class Ordering extends BaseEntity {
     private String delYn = "N";
 
     public OrderListResDto fromEntity() {
+        List<OrderListResDto.OrderDetailResDto> orderDetailResDtos = new ArrayList<>();
+        for (OrderListResDto.OrderDetailResDto orderDetailResDto : orderDetailResDtos) {
+            orderDetailResDtos.add(orderDetailResDto);
+        }
+
         return OrderListResDto.builder()
                 .id(this.id)
                 .memberEmail(member.getEmail())
                 .orderStatus(this.orderStatus)
-                .OrderDetailDtos(new ArrayList<>())
+                .OrderDetailDtos(orderDetailResDtos)
                 .build();
     }
 

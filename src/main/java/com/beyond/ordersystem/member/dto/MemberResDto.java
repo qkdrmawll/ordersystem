@@ -17,16 +17,8 @@ import javax.persistence.Enumerated;
 @Builder
 public class MemberResDto {
     private Long id;
-
     private String name;
     private String email;
     private Address address;
-
-    public MemberResDto fromEntity(Member member) {
-        this.id = member.getId();
-        this.name = member.getName();
-        this.email = member.getEmail();
-        this.address = member.getAddress();
-        return this;
-    }
+    private int orderCount;
 }

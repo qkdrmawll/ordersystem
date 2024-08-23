@@ -18,9 +18,11 @@ public class InitialDataLoader implements CommandLineRunner {
     private MemberRepository memberRepository;
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("hello world");
         if(memberRepository.findByEmailAndDelYn("admin@test.com","N").isEmpty()) {
             memberService.memberCreate(MemberCreateReqDto.builder().name("admin").email("admin@test.com").password("12341234").role(Role.ADMIN).build());
+        }
+        if(memberRepository.findByEmailAndDelYn("test@naver.com","N").isEmpty()) {
+            memberService.memberCreate(MemberCreateReqDto.builder().name("test").email("test@naver.com").password("12341234").role(Role.USER).build());
         }
     }
 }

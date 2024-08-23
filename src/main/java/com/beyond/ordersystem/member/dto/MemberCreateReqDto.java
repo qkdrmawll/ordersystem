@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 
 @Data
 @NoArgsConstructor
@@ -33,6 +34,7 @@ public class MemberCreateReqDto {
                 .password(password)
                 .address(this.address)
                 .role(this.role)
+                .orderList(new ArrayList<>())
                 .delYn("N")
                 .build();
     }

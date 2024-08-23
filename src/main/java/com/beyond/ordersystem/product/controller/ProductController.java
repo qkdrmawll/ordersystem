@@ -3,6 +3,7 @@ package com.beyond.ordersystem.product.controller;
 import com.beyond.ordersystem.common.dto.CommonResDto;
 import com.beyond.ordersystem.product.dto.ProductCreateReqDto;
 import com.beyond.ordersystem.product.dto.ProductResDto;
+import com.beyond.ordersystem.product.dto.ProductSearchDto;
 import com.beyond.ordersystem.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -31,8 +32,8 @@ public class ProductController {
         return new ResponseEntity<>(new CommonResDto(HttpStatus.CREATED, "상품이 성공적으로 등록되었습니다.", productResDto), HttpStatus.CREATED);
     }
     @GetMapping("/product/list")
-    public ResponseEntity<CommonResDto> productList(@PageableDefault(sort = "createdTime",direction = Sort.Direction.DESC) Pageable pageable) {
-        Page<ProductResDto> productResDtos = productService.productList(pageable);
+    public ResponseEntity<CommonResDto> productList(ProductSearchDto searchDto, @PageableDefault(sort = "createdTime",direction = Sort.Direction.DESC) Pageable pageable) {
+        Page<ProductResDto> productResDtos = productService.productList(searchDto, pageable);
         return new ResponseEntity<>(new CommonResDto(HttpStatus.OK, "상품 목록이 성공적으로 조회되었습니다.", productResDtos), HttpStatus.OK);
     }
 
