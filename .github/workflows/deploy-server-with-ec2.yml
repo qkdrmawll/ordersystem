@@ -32,3 +32,25 @@ jobs:
           key: ${{secrets.EC2_PEMKEY}}
           source: "./build/libs/*.jar"
           target: "/home/ubuntu"
+
+
+      - name: install java and run jar on ec2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ec2-52-78-232-231.ap-northeast-2.compute.amazonaws.com
+          username: ubuntu
+          key: ${{secrets.EC2_PEMKEY}}
+          script: |
+              sudo apt-get update && sudo apt-get install openjdk-11-jdk -y
+            if ! type java > /dev/null; then
+            else
+              echo "java is already installed"
+            fi
+            sudo killall java
+            nohub java -jar /home/ubuntu/build/libs/*jar \
+            --spring.redis.host=${{secrets.REDIS_HOST}} \
+            --spring.datasource.url=jdbc:mariadb://${{secrets.DB_HOST}}:3306/order \
+            --spring.datasource.username=admin \
+            --spring.datasource.password=${{secrets.DB_PW}} \
+            --cloud.aws.credentials.access-key=${{S3_KEY}} \
+            --cloud.aws.credentials.secret-key=${{S3_KEY}} > /home/ubuntu/app.log 2>&1 &
