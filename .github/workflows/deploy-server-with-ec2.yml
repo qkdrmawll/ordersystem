@@ -33,7 +33,6 @@ jobs:
           source: "./build/libs/*.jar"
           target: "/home/ubuntu"
 
-
       - name: install java and run jar on ec2
         uses: appleboy/ssh-action@master
         with:
@@ -41,8 +40,8 @@ jobs:
           username: ubuntu
           key: ${{secrets.EC2_PEMKEY}}
           script: |
-              sudo apt-get update && sudo apt-get install openjdk-11-jdk -y
             if ! type java > /dev/null; then
+              sudo apt-get update && sudo apt-get install openjdk-11-jdk -y
             else
               echo "java is already installed"
             fi
