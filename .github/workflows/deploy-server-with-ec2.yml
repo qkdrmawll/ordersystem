@@ -23,17 +23,19 @@ jobs:
           chmod 777 ./gradlew
           ./gradlew bootJar
 
-      - name: copy jar to ec2
+      
+
+      - name: copy jar to ec2 instance2
         uses: appleboy/scp-action@master
         with:
-          host: ec2-52-78-232-231.ap-northeast-2.compute.amazonaws.com
+          host: ec2-43-200-245-68.ap-northeast-2.compute.amazonaws.com
           username: ubuntu
-#          pem 키를 통해 해당 인스턴스에 접근
+          #          pem 키를 통해 해당 인스턴스에 접근
           key: ${{secrets.EC2_PEMKEY}}
           source: "./build/libs/*.jar"
           target: "/home/ubuntu"
 
-      - name: install java and run jar on ec2
+      - name: install java and run jar on ec2 instance2
         uses: appleboy/ssh-action@master
         with:
           host: ec2-52-78-232-231.ap-northeast-2.compute.amazonaws.com
