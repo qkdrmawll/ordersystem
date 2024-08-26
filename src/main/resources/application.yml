@@ -34,7 +34,7 @@ jwt:
   expiration: 300
   secretKey: my_token_secret
   expirationRt: 14400
-  secretKeyRt: hackerton_secret
+  secretKeyRt: hacerton_secret
 
 # aws s3 설정
 cloud:
